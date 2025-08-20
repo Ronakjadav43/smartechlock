@@ -1,4 +1,4 @@
-// File: C:\Users\Admin\Desktop\project\gavragBhai\new repo\smartechlock\src\app\layout.tsx
+// File: C:\Users\Admin\Desktop\project\gavragBhai\smartechlock\src\app\layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
