@@ -31602,10 +31602,11 @@ a.meanmenu-reveal {
 }
 
 .mean-container .mean-nav ul li li a {
-	width: 80%;
-	padding: 10px 10%;
+	width: 100%;
+	padding: 10px 0 10px 5%;
 	text-shadow: none !important;
-	visibility: visible
+	visibility: visible;
+	font-size: 12px !important
 }
 
 .mean-container .mean-nav ul li.mean-last a {
@@ -35733,7 +35734,7 @@ only screen and (min-width:992px)and (max-width:1199px) {
 	box-shadow: -5px 0 20px -5px rgba(0, 0, 0, .5);
 	transition: all .3s cubic-bezier(.785, .135, .15, .86);
 	z-index: 9999;
-	padding: 30px;
+	padding: 16px;
 	min-width: 300px;
 	overflow-y: scroll
 }

@@ -6,10 +6,10 @@ export default function Footer() {
           <div className="theme-white p-relative white-bg">
             <div className="row">
               <div className="col-lg-4 col-md-4 col-12 text-center text-lg-start">
-                <div className="tp-footer-logo">
+                <div className="tp-footer-logo w-[155px] ">
                   <a href="#">
                     {" "}
-                    <img src="assets/img/logo/logo-3.png" alt="theme-pure" />
+                    <img src="assets/img/logo/st.png" alt="theme-pure" />
                   </a>
                 </div>
               </div>

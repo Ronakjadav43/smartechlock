@@ -96,7 +96,7 @@ export default function ServicesSection() {
                 </button>
               </div>
             </nav>
-            {/* <div className="tab-content" id="nav-tabContent">
+            <div className="tab-content" id="nav-tabContent">
               <div className="tab-pane fade show active" role="tabpanel">
                 <div className="slider-tab-main white-bg">
                   <div className="row">
@@ -135,7 +135,7 @@ export default function ServicesSection() {
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

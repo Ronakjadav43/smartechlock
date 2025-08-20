@@ -1,20 +1,98 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
 interface MobileSidebarProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
+// Sidebar data in constants
+const SIDEBAR_DATA = {
+  logo: {
+    href: "index.html",
+    src: "assets/img/logo/st.png",
+    alt: "logo",
+  },
+  menu: [
+    {
+      label: "Home",
+      href: "index.html",
+      // submenu: [
+      //   { label: "Home Style 01", href: "index.html" },
+      //   { label: "Home Style 02", href: "home-2" },
+      //   { label: "Home Style 03", href: "home-3" },
+      // ],
+    },
+    { label: "About Us", href: "about" },
+    {
+      label: "Product",
+      href: "team",
+      submenu: [
+        { label: "RFID Hotel Door Lock", href: "team" },
+        { label: "Digital Hotel Lock", href: "team-details" },
+        { label: "Keyless Hotel Door Lock", href: "portfolio" },
+        { label: "TTlock Bluetooth Door Lock", href: "portfolio-details" },
+        { label: "WIFI Smart Lock", href: "faq" },
+        { label: "Fingerprint Door Lock", href: "shop" },
+        { label: "RFID Cabinet Lock", href: "shop-details" },
+        { label: "Fingerprint Cabinet Lock", href: "cart" },
+        { label: "Digital Locker Lock", href: "checkout" },
+        { label: "RFID Hotel Lock Accessary", href: "#" },
+        { label: "TT Hotel Lock Accessary", href: "#" },
+      ],
+    },
+    {
+      label: "Solution",
+      href: "solution",
+      submenu: [
+        { label: "Tuya Smart Door Lock", href: "blog" },
+        { label: "TTlock Smart Lock", href: "blog" },
+        { label: "Smart Lock for Airbnb", href: "blog" },
+        { label: "Hotel Keyless Entry System", href: "blog" },
+        { label: "RFID Hotel Door Lock System", href: "blog" },
+        { label: "Keyless Cabinet Locking System", href: "blog" },
+        { label: "Apartment Door Lock", href: "blog" },
+        { label: "Door Lock for Rental Property", href: "blog" },
+      ],
+    },
+    {
+      label: "Support",
+      href: "Support",
+      submenu: [
+        { label: "Become Distributor", href: "Become Distributor" },
+        { label: "FAQ", href: "FAQ" },
+        { label: "Sample Policy", href: "Sample Policy" },
+        { label: "Warranty Policy", href: "Warranty Policy" },
+        { label: "Document Download", href: "Document Download" },
+      ],
+    },
+    { label: "Contact", href: "contact" },
+  ],
+  contact: [
+    "27 Division St, New York",
+    "+1 800 123 456 78",
+    "sectox@mail.com",
+  ],
+  socials: [
+    { icon: "fab fa-facebook-f", href: "http://facebook.com/" },
+    { icon: "fab fa-twitter", href: "http://twitter.com/" },
+    { icon: "fab fa-behance", href: "https://www.behance.com/" },
+    { icon: "fab fa-youtube", href: "https://www.youtube.com/" },
+    { icon: "fab fa-linkedin-in", href: "https://www.linkedin.com/" },
+  ],
+};
+
 export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
-  const [openDropdowns, setOpenDropdowns] = useState<string[]>([])
+  const [openDropdowns, setOpenDropdowns] = useState<string[]>([]);
 
   const toggleDropdown = (menuItem: string) => {
     setOpenDropdowns((prev) =>
-      prev.includes(menuItem) ? prev.filter((item) => item !== menuItem) : [...prev, menuItem],
-    )
-  }
+      prev.includes(menuItem)
+        ? prev.filter((item) => item !== menuItem)
+        : [...prev, menuItem]
+    );
+  };
 
   return (
     <>
@@ -22,149 +100,101 @@ export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
         <button className="sidebar-close" onClick={onClose}>
           <i className="fal fa-times" />
         </button>
+
+        {/* Logo */}
         <div className="side-logo mb-20">
-          <a href="index.html">
-            <img src="assets/img/logo/logo.png" alt="logo" />
+          <a href={SIDEBAR_DATA.logo.href}>
+            <img
+              src={SIDEBAR_DATA.logo.src}
+              alt={SIDEBAR_DATA.logo.alt}
+              className="w-[200px] h-auto"
+            />
           </a>
         </div>
+
+        {/* Mobile Menu */}
         <div className="mobile-menu mean-container">
           <nav className="mean-nav d-xl-none">
             <ul>
-              <li className="has-dropdown">
-                <a href="index.html">Home</a>
-                <ul className="submenu" style={{ display: openDropdowns.includes("home") ? "block" : "none" }}>
-                  <li>
-                    <a href="index.html">Home Style 01</a>
-                  </li>
-                  <li>
-                    <a href="home-2">Home Style 02</a>
-                  </li>
-                  <li>
-                    <a href="home-3">Home Style 03</a>
-                  </li>
-                </ul>
-                <button
-                  onClick={() => toggleDropdown("home")}
-                  className="mean-expand"
-                  style={{ fontSize: 18, cursor: "pointer", background: "none", border: "none" }}
+              {SIDEBAR_DATA.menu.map((menuItem, index) => (
+                <li
+                  key={index}
+                  className={menuItem.submenu ? "has-dropdown" : ""}
                 >
-                  <i className={openDropdowns.includes("home") ? "fal fa-minus" : "fal fa-plus"} />
-                </button>
-              </li>
-              <li>
-                <a href="about">About</a>
-              </li>
-              <li className="has-dropdown">
-                <a href="service">Service</a>
-                <ul className="submenu" style={{ display: openDropdowns.includes("service") ? "block" : "none" }}>
-                  <li>
-                    <a href="service">Service</a>
-                  </li>
-                  <li>
-                    <a href="service-details">Service Details</a>
-                  </li>
-                </ul>
-                <button
-                  onClick={() => toggleDropdown("service")}
-                  className="mean-expand"
-                  style={{ fontSize: 18, cursor: "pointer", background: "none", border: "none" }}
-                >
-                  <i className={openDropdowns.includes("service") ? "fal fa-minus" : "fal fa-plus"} />
-                </button>
-              </li>
-              <li className="has-dropdown">
-                <a href="team">Pages</a>
-                <ul className="submenu" style={{ display: openDropdowns.includes("pages") ? "block" : "none" }}>
-                  <li>
-                    <a href="team">Team</a>
-                  </li>
-                  <li>
-                    <a href="team-details">Team Details</a>
-                  </li>
-                  <li>
-                    <a href="portfolio">Portfolio</a>
-                  </li>
-                  <li>
-                    <a href="portfolio-details">Portfolio Details</a>
-                  </li>
-                  <li>
-                    <a href="faq">FAQ Page</a>
-                  </li>
-                  <li>
-                    <a href="shop">Shop</a>
-                  </li>
-                  <li>
-                    <a href="shop-details">Shop Details</a>
-                  </li>
-                  <li>
-                    <a href="cart">cart</a>
-                  </li>
-                  <li>
-                    <a href="checkout">Checkout</a>
-                  </li>
-                  <li>
-                    <a href="#">404</a>
-                  </li>
-                </ul>
-                <button
-                  onClick={() => toggleDropdown("pages")}
-                  className="mean-expand"
-                  style={{ fontSize: 18, cursor: "pointer", background: "none", border: "none" }}
-                >
-                  <i className={openDropdowns.includes("pages") ? "fal fa-minus" : "fal fa-plus"} />
-                </button>
-              </li>
-              <li className="has-dropdown">
-                <a href="blog">Blog</a>
-                <ul className="submenu" style={{ display: openDropdowns.includes("blog") ? "block" : "none" }}>
-                  <li>
-                    <a href="blog">Blog</a>
-                  </li>
-                  <li>
-                    <a href="blog-details">Blog Details</a>
-                  </li>
-                </ul>
-                <button
-                  onClick={() => toggleDropdown("blog")}
-                  className="mean-expand"
-                  style={{ fontSize: 18, cursor: "pointer", background: "none", border: "none" }}
-                >
-                  <i className={openDropdowns.includes("blog") ? "fal fa-minus" : "fal fa-plus"} />
-                </button>
-              </li>
-              <li>
-                <a href="contact">Contact</a>
-              </li>
+                  <a href={menuItem.href}>{menuItem.label}</a>
+
+                  {menuItem.submenu && (
+                    <>
+                      <ul
+                        className="submenu"
+                        style={{
+                          display: openDropdowns.includes(menuItem.label)
+                            ? "block"
+                            : "none",
+                        }}
+                      >
+                        {menuItem.submenu.map((subItem, subIndex) => (
+                          <li key={subIndex}>
+                            <a href={subItem.href} className="!text-sm">{subItem.label}</a>
+                          </li>
+                        ))}
+                      </ul>
+                      <button
+                        onClick={() => toggleDropdown(menuItem.label)}
+                        className="mean-expand absolute top-2 right-0 mean-expand mean-clicked"
+                        style={{
+                          fontSize: 18,
+                          cursor: "pointer",
+                          background: "none",
+                          border: "none",
+                        }}
+                      >
+                        <i
+                          className={
+                            openDropdowns.includes(menuItem.label)
+                              ? "fal fa-minus"
+                              : "fal fa-plus"
+                          }
+                        />
+                      </button>
+                    </>
+                  )}
+                </li>
+              ))}
             </ul>
           </nav>
+
+          {/* Contact Info */}
           <div className="sidebar-title">
             <h3>CONTACT US</h3>
           </div>
           <ul className="sidebar-list">
-            <li>27 Division St, New York</li>
-            <li>+1 800 123 456 78</li>
-            <li>sectox@mail.com</li>
+            {SIDEBAR_DATA.contact.map((info, idx) => (
+              <li key={idx}>{info}</li>
+            ))}
           </ul>
+
+          {/* Social Links */}
           <div className="tp-sidebar-social">
-            <a href="http://facebook.com/" target="_blank" rel="noreferrer">
-              <i className="fab fa-facebook-f" />
-            </a>
-            <a href="http://twitter.com/" target="_blank" rel="noreferrer">
-              <i className="fab fa-twitter" />
-            </a>
-            <a href="https://www.behance.com/" target="_blank" rel="noreferrer">
-              <i className="fab fa-behance" />
-            </a>
-            <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">
-              <i className="fab fa-youtube" />
-            </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
-              <i className="fab fa-linkedin-in" />
-            </a>
+            {SIDEBAR_DATA.socials.map((social, idx) => (
+              <a
+                key={idx}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className={social.icon} />
+              </a>
+            ))}
           </div>
         </div>
       </div>
-      <div className={`body-overlay ${isOpen ? "opened" : ""}`} onClick={onClose} />
+
+      {/* Overlay */}
+      <div
+        className={`body-overlay ${isOpen ? "opened" : ""}`}
+        onClick={onClose}
+      />
     </>
-  )
+  );
 }

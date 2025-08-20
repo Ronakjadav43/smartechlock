@@ -112,6 +112,8 @@
 @layer theme {
   :root, :host {
     --spacing: .25rem;
+    --text-sm: .875rem;
+    --text-sm--line-height: calc(1.25 / .875);
     --ease-in: cubic-bezier(.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, .2, 1);
     --ease-in-out: cubic-bezier(.4, 0, .2, 1);
@@ -511,6 +513,14 @@
     position: sticky;
   }
 
+  .top-2 {
+    top: calc(var(--spacing) * 2);
+  }
+
+  .right-0 {
+    right: calc(var(--spacing) * 0);
+  }
+
   .col-5 {
     grid-column: 5;
   }
@@ -765,8 +775,20 @@
     display: table;
   }
 
+  .h-auto {
+    height: auto;
+  }
+
   .w-100 {
     width: calc(var(--spacing) * 100);
+  }
+
+  .w-\[155px\] {
+    width: 155px;
+  }
+
+  .w-\[200px\] {
+    width: 200px;
   }
 
   .transform {
@@ -1018,6 +1040,11 @@
 
   .text-start {
     text-align: start;
+  }
+
+  .\!text-sm {
+    font-size: var(--text-sm) !important;
+    line-height: var(--tw-leading, var(--text-sm--line-height)) !important;
   }
 
   .text-primary {
