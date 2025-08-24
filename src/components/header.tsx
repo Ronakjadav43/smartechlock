@@ -1,10 +1,9 @@
 "use client";
 
+import { getMenu } from "@/actions/home";
+import { Menutype } from "@/types";
+import { useQueries, UseQueryResult } from "@tanstack/react-query";
 import { useState } from "react";
-
-interface HeaderProps {
-  onMobileMenuToggle: () => void;
-}
 
 // Header data in constants
 const HEADER_DATA = {
@@ -83,8 +82,43 @@ const HEADER_DATA = {
   ],
 };
 
+
+interface HeaderProps {
+  onMobileMenuToggle: () => void;
+
+
+ 
+
+
+
+
+}
+
+
+
+
 export default function Header({ onMobileMenuToggle }: HeaderProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+
+ const queries = useQueries({
+    queries: [
+      {
+        queryKey: ["menu"],
+        queryFn: getMenu,
+      },
+    ],
+  }) as [
+    UseQueryResult<Menutype[], Error> // getNews/getSortedNews returns an array of News
+  ];
+
+  // Destructuring results for each query
+  const [menu] = queries;
+
+  const menuData = menu.data ?? undefined;
+
+console.log(menuData,"1111111111111111111");
+
 
   return (
     <header>
@@ -156,17 +190,19 @@ export default function Header({ onMobileMenuToggle }: HeaderProps) {
               <div className="tp-main-menu text-center">
                 <nav id="mobile-menu">
                   <ul>
-                    {HEADER_DATA.navMenu.map((menu, idx) => (
+                    {menuData && menuData.map((menu, idx) => (
                       <li
                         key={idx}
-                        className={menu.submenu ? "has-dropdown" : ""}
+                        className={menu.sub_menus ? "has-dropdown" : ""}
                       >
-                        <a href={menu.href}>{menu.label}</a>
-                        {menu.submenu && (
+                        <a href={menu.slug}>{menu.title}</a>
+
+                        
+                         {menu.sub_menus && menu.sub_menus && (
                           <ul className="submenu">
-                            {menu.submenu.map((sub, subIdx) => (
+                            {menu.sub_menus.map((sub, subIdx) => (
                               <li key={subIdx}>
-                                <a href={sub.href}>{sub.label}</a>
+                                <a href={sub.slug}>{sub.title}</a>
                               </li>
                             ))}
                           </ul>

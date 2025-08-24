@@ -15,8 +15,10 @@ import QuoteSection from "@/components/quote-section"
 import VideoSection from "@/components/video-section"
 import BlogSection from "@/components/blog-section"
 import Footer from "@/components/footer"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 export default function Home() {
+   const queryClient = new QueryClient();
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
 
   const handleMobileMenuToggle = () => {
@@ -28,6 +30,7 @@ export default function Home() {
   }
 
   return (
+      <QueryClientProvider client={queryClient}>
     <div id="__next">
       <Header onMobileMenuToggle={handleMobileMenuToggle} />
       <MobileSidebar isOpen={isMobileSidebarOpen} onClose={handleMobileSidebarClose} />
@@ -44,5 +47,6 @@ export default function Home() {
       <BlogSection />
       <Footer />
     </div>
+    </QueryClientProvider>
   )
 }
