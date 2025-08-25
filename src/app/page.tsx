@@ -15,26 +15,36 @@ import QuoteSection from "@/components/quote-section"
 import VideoSection from "@/components/video-section"
 import BlogSection from "@/components/blog-section"
 import Footer from "@/components/footer"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { QueryClient, QueryClientProvider, useQueries, UseQueryResult } from "@tanstack/react-query"
+import { getHome } from "@/actions/home"
+import { HomeData } from "@/types"
 
 export default function Home() {
-   const queryClient = new QueryClient();
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
 
-  const handleMobileMenuToggle = () => {
-    setIsMobileSidebarOpen(!isMobileSidebarOpen)
-  }
+   const queriess = useQueries({
+    queries: [
+      {
+        queryKey: ["home"],
+        queryFn:() => getHome("home"),
+      },
+    ],
+  }) as [UseQueryResult<HomeData[], Error>, UseQueryResult<HomeData, Error>];
 
-  const handleMobileSidebarClose = () => {
-    setIsMobileSidebarOpen(false)
-  }
+  const [home] = queriess;
+
+  const homeData = home.data || undefined;
+
+console.log(homeData,"----------------------123");
+
+
+
+
 
   return (
-      <QueryClientProvider client={queryClient}>
+      // <QueryClientProvider client={queryClient}>
     <div id="__next">
-      <Header onMobileMenuToggle={handleMobileMenuToggle} />
-      <MobileSidebar isOpen={isMobileSidebarOpen} onClose={handleMobileSidebarClose} />
-      <HeroSlider />
+    
+      <HeroSlider homeData={homeData} />
       <AboutSection />
       <FeaturesSection />
       <ServicesSection />
@@ -45,8 +55,8 @@ export default function Home() {
       <QuoteSection />
       <VideoSection />
       <BlogSection />
-      <Footer />
+    
     </div>
-    </QueryClientProvider>
+    // </QueryClientProvider>
   )
 }

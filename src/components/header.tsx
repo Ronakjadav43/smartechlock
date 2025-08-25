@@ -186,7 +186,7 @@ console.log(menuData,"1111111111111111111");
             </div>
 
             {/* Navigation Menu */}
-            <div className="col-xl-7 d-none d-xl-block">
+            <div className="col-xl-10 d-none d-xl-block">
               <div className="tp-main-menu text-center">
                 <nav id="mobile-menu">
                   <ul>
@@ -215,7 +215,7 @@ console.log(menuData,"1111111111111111111");
             </div>
 
             {/* Right Side Icons */}
-            <div className="col-xl-3 col-lg-6 col-md-7 col-5">
+            {/* <div className="col-xl-3 col-lg-6 col-md-7 col-5">
               <div className="search-main p-relative">
                 <div className="tp-header-right">
                   <button
@@ -248,7 +248,7 @@ console.log(menuData,"1111111111111111111");
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 "use client"
 
+import { HomeData } from "@/types"
+import Image from "next/image"
 import { useState, useEffect } from "react"
 
 const slides = [
@@ -26,7 +28,16 @@ const slides = [
   },
 ]
 
-export default function HeroSlider() {
+
+
+
+type Props = {
+    homeData: HomeData[] | undefined
+  }
+
+
+
+export default function HeroSlider({homeData = undefined} : Props) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
@@ -51,6 +62,19 @@ export default function HeroSlider() {
   const goToNextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length)
   }
+
+
+console.log(homeData,"----------------------hero");
+
+
+  if (!homeData) {
+    return (
+     <h1>Loading...</h1>
+    )
+  }
+
+
+
 
   return (
     <div className="tp-slider-area">
@@ -163,5 +187,11 @@ export default function HeroSlider() {
         </div>
       </div>
     </div>
+
+
+
+
+
+
   )
 }
