@@ -186,7 +186,7 @@ console.log(menuData,"1111111111111111111");
             </div>
 
             {/* Navigation Menu */}
-            <div className="col-xl-10 d-none d-xl-block">
+            <div className="col-xl-10 d-none d-xl-block cursor-pointer">
               <div className="tp-main-menu text-center">
                 <nav id="mobile-menu">
                   <ul>

@@ -73,7 +73,7 @@ export interface Page {
 }
 
 export interface HomeData {
-  section: Section[];
+  sections: Section[];
   id: number;
   documentId: string;
   title: string;

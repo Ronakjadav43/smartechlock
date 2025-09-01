@@ -1,80 +1,50 @@
 "use client"
 
 import { HomeData } from "@/types"
-import Image from "next/image"
-import { useState, useEffect } from "react"
-
-const slides = [
-  {
-    id: 1,
-    image: "assets/img/slider/slider3.jpg",
-    subtitle: "Best cctv solution in us",
-    title: "Secure Your Family From All Issues",
-    bigText: "CCTV",
-  },
-  {
-    id: 2,
-    image: "assets/img/slider/slider4.jpg",
-    subtitle: "Professional Security Systems",
-    title: "Advanced Protection Technology",
-    bigText: "CCTV",
-  },
-  {
-    id: 3,
-    image: "assets/img/slider/slider3.jpg",
-    subtitle: "24/7 Monitoring Service",
-    title: "Complete Peace of Mind",
-    bigText: "CCTV",
-  },
-]
-
-
-
+import { useState, useEffect, useMemo } from "react"
 
 type Props = {
-    homeData: HomeData[] | undefined
-  }
+  homeData: HomeData[] | undefined
+}
 
-
-
-export default function HeroSlider({homeData = undefined} : Props) {
+export default function HeroSlider({ homeData = undefined }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
+  // Flatten all media items into a single array for easy mapping
+  const allSlides = useMemo(() => {
+    if (!homeData) return []
+    return homeData.flatMap((data) =>
+      data.sections[0].section_items.flatMap((item) =>
+        Array.isArray(item.multipleMedia)
+          ? item.multipleMedia.map((media) => ({
+              media,
+              item,
+            }))
+          : []
+      )
+    )
+  }, [homeData])
+
   useEffect(() => {
-    if (!isAutoPlaying) return
+    if (!isAutoPlaying || allSlides.length === 0) return
 
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
+      setCurrentSlide((prev) => (prev + 1) % allSlides.length)
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [isAutoPlaying])
+  }, [isAutoPlaying, allSlides.length])
 
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index)
-  }
-
-  const goToPrevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
-  }
-
-  const goToNextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
-
-
-console.log(homeData,"----------------------hero");
-
+  const goToSlide = (index: number) => setCurrentSlide(index)
+  const goToPrevSlide = () =>
+    setCurrentSlide((prev) => (prev === 0 ? allSlides.length - 1 : prev - 1))
+  const goToNextSlide = () =>
+    setCurrentSlide((prev) => (prev + 1) % allSlides.length)
 
   if (!homeData) {
-    return (
-     <h1>Loading...</h1>
-    )
+    return <h1>Loading...</h1>
   }
-
-
-
 
   return (
     <div className="tp-slider-area">
@@ -95,23 +65,21 @@ console.log(homeData,"----------------------hero");
             <div
               className="slick-track"
               style={{
-                width: `${slides.length * 100}%`,
-                transform: `translateX(-${currentSlide * (100 / slides.length)}%)`,
+                width: `${allSlides.length * 100}%`,
+                transform: `translateX(-${currentSlide * (100 / allSlides.length)}%)`,
                 transition: "transform 0.5s ease",
+                display: "flex",
               }}
             >
-              {slides.map((slide, index) => (
+              {allSlides.map(({ media, item }, index) => (
                 <div
-                  key={slide.id}
-                  data-index={index}
+                  key={index}
                   className={`slick-slide ${index === currentSlide ? "slick-active slick-current" : ""}`}
                   tabIndex={-1}
                   aria-hidden={index !== currentSlide}
                   style={{
                     outline: "none",
-                    width: `${100 / slides.length}%`,
-                    position: "relative",
-                    left: 0,
+                    width: `${100 / allSlides.length}%`,
                     opacity: index === currentSlide ? 1 : 0.7,
                     transition: "opacity 500ms ease, visibility 500ms ease",
                   }}
@@ -121,7 +89,7 @@ console.log(homeData,"----------------------hero");
                       <div
                         className="tp-slider-item p-relative tp-slider-height tp-slider-overlay-3 d-flex align-items-center"
                         style={{
-                          backgroundImage: `url(${slide.image})`,
+                          backgroundImage: `url(${process.env.NEXT_PUBLIC_API_URL}${media.formats.large.url})`,
                         }}
                       >
                         <div className="container">
@@ -129,10 +97,10 @@ console.log(homeData,"----------------------hero");
                             <div className="col-xl-8 m-auto">
                               <div className="tp-slider-content tp-slider-content-two tp-slider-content-three">
                                 <div className="tp-slider-big-text d-none d-xl-block">
-                                  <h2>{slide.bigText}</h2>
+                                  <h2>{item.title}</h2>
                                 </div>
-                                <span className="tp-slider-sub-title p-0">{slide.subtitle}</span>
-                                <h2 className="tp-slider-title">{slide.title}</h2>
+                                <span className="tp-slider-sub-title p-0">{item.subTitle}</span>
+                                <h2 className="tp-slider-title">{item.title}</h2>
                               </div>
                               <div className="tp-slide-btn-box-3 d-flex flex-wrap justify-content-center">
                                 <div className="slider-btn">
@@ -169,7 +137,7 @@ console.log(homeData,"----------------------hero");
             gap: "10px",
           }}
         >
-          {slides.map((_, index) => (
+          {allSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
@@ -187,11 +155,5 @@ console.log(homeData,"----------------------hero");
         </div>
       </div>
     </div>
-
-
-
-
-
-
   )
 }
