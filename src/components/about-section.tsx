@@ -1,39 +1,21 @@
-const aboutData = {
-  section: {
-    subtitle: "About Us",
-    title: "Get Best CCTV Solutions For House",
-    description:
-      "Bandwidth has historically been very unequally distributed worldwide, with increasing concentration in the digital age.",
-  },
-  images: {
-    main: "assets/img/about/about-main-2.jpg",
-    secondary: "assets/img/about/about-main-img.jpg",
-    third: "assets/img/about/ab-main-small.jpg",
-  },
-  features: [
-    {
-      icon: "flaticon-web-security",
-      title: "Private & Personal Security",
-      subtitle: "Bank & Institutions Solution",
-    },
-    {
-      icon: "flaticon-school",
-      title: "We believe the value that our functions add to abusiness.",
-      subtitle: "We believe the value that our functions add to abusiness.",
-    },
-  ],
-  button: {
-    text: "Learn More",
-    link: "about",
-  },
-  signature: {
-    image: "assets/img/about/ab-small3.png",
-    name: "Salim Rana",
-    role: "Head Of Idea",
-  },
-}
+import { HomeData } from "@/types";
+import Img from "./img/img";
 
-export default function AboutSection() {
+type Props = {
+  homeData: HomeData[] | undefined;
+};
+
+export default function AboutSection({ homeData = undefined }: Props) {
+  // Find the About section
+  const aboutSection = homeData
+    ?.flatMap((data) => data.sections)
+    .find((section) => section.type.type === "About Us");
+
+  if (!aboutSection) return null;
+
+  // First item: main content, rest: features
+  const [mainItem, ...featureItems] = aboutSection.section_items;
+
   return (
     <div className="tp-about-area pt-120 pb-90">
       <div className="container">
@@ -41,14 +23,36 @@ export default function AboutSection() {
           {/* Left Images */}
           <div className="col-xl-6 col-lg-6">
             <div className="tp-about-wapper3 mb-30">
-              <div className="ab-main-img">
-                <img className="ab-1st-img" src={aboutData.images.main} alt="theme-pure" />
+              <div className="ab-main-img w-[500px] h-[500px]">
+                <Img
+                  className="ab-1st-img"
+                  src={
+                    mainItem?.multipleMedia?.[0]?.formats?.large?.url
+                      ? `${process.env.NEXT_PUBLIC_API_URL}${mainItem.multipleMedia[0].formats.large.url}`
+                      : ""
+                  }
+                  title="theme-pure"
+                />
               </div>
-              <div className="ab-sec-img">
-                <img src={aboutData.images.secondary} alt="theme-pure" />
+              <div className="ab-sec-img w-[300px] h-[300px]">
+                <Img
+                  src={
+                    mainItem?.multipleMedia?.[1]?.formats?.small?.url
+                      ? `${process.env.NEXT_PUBLIC_API_URL}${mainItem.multipleMedia[1].formats.small.url}`
+                      : ""
+                  }
+                  title="theme-pure"
+                />
               </div>
-              <div className="ab-third-img d-none d-md-block">
-                <img src={aboutData.images.third} alt="theme-pure" />
+              <div className="ab-third-img d-none d-md-block w-[100px] h-[100px]">
+                <Img
+                  src={
+                    mainItem?.multipleMedia?.[2]?.formats?.thumbnail?.url
+                      ? `${process.env.NEXT_PUBLIC_API_URL}${mainItem.multipleMedia[2].formats.thumbnail.url}`
+                      : ""
+                  }
+                  title="theme-pure"
+                />
               </div>
             </div>
           </div>
@@ -58,40 +62,41 @@ export default function AboutSection() {
             <div className="tp-ab-wrapper-3 pt-55 pl-50 mb-30">
               <div className="tp-section-box tp-section-box-2 mb-40  p-relative">
                 <span className="tp-section-subtitle right d-inline-block">
-                  {aboutData.section.subtitle}
+                  {aboutSection.type.type}
                 </span>
-                <h2 className="tp-section-title mb-20">{aboutData.section.title}</h2>
-                <p className="p-text">{aboutData.section.description}</p>
+                <h2 className="tp-section-title mb-20">{mainItem?.title}</h2>
+                <p className="p-text">{mainItem?.subTitle}</p>
               </div>
 
               <div className="tp-ab-fe-box mb-40">
-                {aboutData.features.map((feature, index) => (
+                {featureItems.map((feature, idx) => (
                   <div
-                    key={index}
+                    key={feature.id}
                     className="about-feature-list d-flex align-items-center mb-20"
                   >
                     <div className="about-icon mr-25">
-                      <i className={feature.icon} />
+                      <i className={feature.URL ?? undefined} />
                     </div>
                     <div className="about-feature-text">
                       <h5 className="m-0 mb-5">{feature.title}</h5>
-                      <p className="m-0">{feature.subtitle}</p>
+                      <p className="m-0">{feature.subTitle}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
+              {/* You can keep static signature/button or map from data if available */}
               <div className="tp-about-fea-signature d-flex align-items-center">
                 <div className="mr-30 mb-10">
-                  <a className="tp-btn-border" href={aboutData.button.link}>
-                    {aboutData.button.text} <i className="fal fa-long-arrow-right" />
+                  <a className="tp-btn-border" href="#">
+                    Learn More <i className="fal fa-long-arrow-right" />
                   </a>
                 </div>
                 <div className="about-signature d-flex align-items-center mb-10">
-                  <img src={aboutData.signature.image} alt="theme-pure" />
+                  <img src="assets/img/about/ab-small3.png" alt="theme-pure" />
                   <div className="ab-meta-content ml-15">
-                    <h6 className="m-0 ab-meta-title">{aboutData.signature.name}</h6>
-                    <span className="ab-meta-subtitle">{aboutData.signature.role}</span>
+                    <h6 className="m-0 ab-meta-title">Salim Rana</h6>
+                    <span className="ab-meta-subtitle">Head Of Idea</span>
                   </div>
                 </div>
               </div>
@@ -100,5 +105,5 @@ export default function AboutSection() {
         </div>
       </div>
     </div>
-  )
+  );
 }

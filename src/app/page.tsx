@@ -45,8 +45,8 @@ console.log(homeData,"----------------------123");
     <div id="__next">
     
       <HeroSlider homeData={homeData} />
-      <AboutSection />
-      <FeaturesSection />
+      <AboutSection homeData={homeData} />
+      <FeaturesSection homeData={homeData} />
       <ServicesSection />
       <TestimonialsSection />
       <ProcessSection />
