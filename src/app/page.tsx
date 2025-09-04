@@ -14,7 +14,7 @@ import FaqSection from "@/components/faq-section"
 import QuoteSection from "@/components/quote-section"
 import VideoSection from "@/components/video-section"
 import BlogSection from "@/components/blog-section"
-import Footer from "@/components/footer"
+// import Footer from "@/components/footer"
 import { QueryClient, QueryClientProvider, useQueries, UseQueryResult } from "@tanstack/react-query"
 import { getHome } from "@/actions/home"
 import { HomeData } from "@/types"
@@ -47,14 +47,14 @@ console.log(homeData,"----------------------123");
       <HeroSlider homeData={homeData} />
       <AboutSection homeData={homeData} />
       <FeaturesSection homeData={homeData} />
-      <ServicesSection />
-      <TestimonialsSection />
+      {/* <ServicesSection /> */}
+      {/* <TestimonialsSection />
       <ProcessSection />
       <ProductsSection />
       <FaqSection />
       <QuoteSection />
       <VideoSection />
-      <BlogSection />
+      <BlogSection /> */}
     
     </div>
     // </QueryClientProvider>

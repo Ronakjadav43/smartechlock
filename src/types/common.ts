@@ -26,6 +26,8 @@ export interface Image {
 }
 
 export interface SectionItem {
+  sub_items: any;
+  // sub_items: string | null;
   multipleMedia: string | null;
   id: number;
   documentId: string;

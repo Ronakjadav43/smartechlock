@@ -1,75 +1,98 @@
 import { HomeData } from "@/types";
 import Img from "./img/img";
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
+import Image from "next/image";
 
 type Props = {
   homeData: HomeData[] | undefined;
 };
 
 export default function AboutSection({ homeData = undefined }: Props) {
-  // Find the About section
-  const aboutSection = homeData
-    ?.flatMap((data) => data.sections)
-    .find((section) => section.type.type === "About Us");
 
-  if (!aboutSection) return null;
 
-  // First item: main content, rest: features
-  const [mainItem, ...featureItems] = aboutSection.section_items;
+  if (!homeData) return null;
+
 
   return (
     <div className="tp-about-area pt-120 pb-90">
       <div className="container">
+        
+        
+       
+
+
         <div className="row">
           {/* Left Images */}
           <div className="col-xl-6 col-lg-6">
-            <div className="tp-about-wapper3 mb-30">
+
+ {/* {homeData &&
+                  homeData.map((data) =>
+                    data.sections
+                      .filter(
+                        (section) => section.type.type === "About Us"
+                      )
+                      .map((section) =>
+                        section.section_items.map((item, index) => ( */}
+
+            <div className="tp-about-wapper3 mb-30" >
               <div className="ab-main-img w-[500px] h-[500px]">
-                <Img
+                <Image
                   className="ab-1st-img"
-                  src={
-                    mainItem?.multipleMedia?.[0]?.formats?.large?.url
-                      ? `${process.env.NEXT_PUBLIC_API_URL}${mainItem.multipleMedia[0].formats.large.url}`
-                      : ""
-                  }
+                  src={`${process.env.NEXT_PUBLIC_API_URL}${homeData[0]?.sections.find(section => section.type.type === "About Us")?.section_items[0]?.multipleMedia?.[0].formats?.medium?.url}`}
                   title="theme-pure"
+                  width={500}
+                  height={500}
+                  alt="theme-pure"
                 />
               </div>
               <div className="ab-sec-img w-[300px] h-[300px]">
-                <Img
-                  src={
-                    mainItem?.multipleMedia?.[1]?.formats?.small?.url
-                      ? `${process.env.NEXT_PUBLIC_API_URL}${mainItem.multipleMedia[1].formats.small.url}`
-                      : ""
-                  }
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_API_URL}${homeData[0]?.sections.find(section => section.type.type === "About Us")?.section_items[0]?.multipleMedia?.[1]?.formats?.medium?.url}`}
                   title="theme-pure"
+                  width={300}
+                  height={300}
+                  alt="theme-pure"
                 />
               </div>
               <div className="ab-third-img d-none d-md-block w-[100px] h-[100px]">
-                <Img
-                  src={
-                    mainItem?.multipleMedia?.[2]?.formats?.thumbnail?.url
-                      ? `${process.env.NEXT_PUBLIC_API_URL}${mainItem.multipleMedia[2].formats.thumbnail.url}`
-                      : ""
-                  }
+                <Image
+                 src={`${process.env.NEXT_PUBLIC_API_URL}${homeData[0]?.sections.find(section => section.type.type === "About Us")?.section_items[0]?.multipleMedia?.[2]?.formats?.small?.url}`}
                   title="theme-pure"
+                  width={100}
+                  height={100}
+                  alt="theme-pure"
                 />
               </div>
+             
             </div>
+  {/* ))
+                      )
+                  )} */}
+
+
           </div>
 
           {/* Right Content */}
           <div className="col-xl-6 col-lg-6">
-            <div className="tp-ab-wrapper-3 pt-55 pl-50 mb-30">
+              {homeData &&
+                  homeData.map((data) =>
+                    data.sections
+                      .filter(
+                        (section) => section.type.type === "About Us"
+                      )
+                      .map((section) =>
+                        section.section_items.map((item, index) => (
+            <div className="tp-ab-wrapper-3 pt-55 pl-50 mb-30" key={index}>
               <div className="tp-section-box tp-section-box-2 mb-40  p-relative">
                 <span className="tp-section-subtitle right d-inline-block">
-                  {aboutSection.type.type}
+                  {section.type.type}
                 </span>
-                <h2 className="tp-section-title mb-20">{mainItem?.title}</h2>
-                <p className="p-text">{mainItem?.subTitle}</p>
+                <h2 className="tp-section-title mb-20">{item?.title}</h2>
+                <p className="p-text">{item?.subTitle}</p>
               </div>
 
               <div className="tp-ab-fe-box mb-40">
-                {featureItems.map((feature, idx) => (
+                {item.sub_items.map((feature: { id: Key | null | undefined; URL: any; title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; subTitle: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
                   <div
                     key={feature.id}
                     className="about-feature-list d-flex align-items-center mb-20"
@@ -101,8 +124,15 @@ export default function AboutSection({ homeData = undefined }: Props) {
                 </div>
               </div>
             </div>
+              ))
+                      )
+                  )}
           </div>
         </div>
+
+
+
+
       </div>
     </div>
   );
