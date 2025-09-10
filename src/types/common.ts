@@ -26,7 +26,7 @@ export interface Image {
 }
 
 export interface SectionItem {
-  sub_items: any;
+  
   // sub_items: string | null;
   multipleMedia: string | null;
   id: number;
@@ -41,7 +41,30 @@ export interface SectionItem {
   image: Image;
   uploadDocument: string | null;
   URL: string | null;
+   sub_items: subItem[];
 }
+
+
+
+export interface subItem {
+  multipleMedia: string | null;
+  id: number;
+  documentId: string;
+  title: string;
+  subTitle: string | null;
+  date: string | null;
+  details: string | null;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  image: Image;
+  uploadDocument: string | null;
+  URL: string | null;
+  price: string | null;
+}
+
+
+
 
 export interface SectionType {
   id: number;

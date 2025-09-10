@@ -117,7 +117,6 @@ export default function Header({ onMobileMenuToggle }: HeaderProps) {
 
   const menuData = menu.data ?? undefined;
 
-console.log(menuData,"1111111111111111111");
 
 
   return (
@@ -173,7 +172,7 @@ console.log(menuData,"1111111111111111111");
         <div className="container-fluid">
           <div className="row align-items-center">
             {/* Logo */}
-            {/* <div className="col-xl-2 col-lg-6 col-md-5 col-7">
+            <div className="col-xl-2 col-lg-6 col-md-5 col-7">
               <div className="logo">
                 <a href={HEADER_DATA.logo.href}>
                   <img
@@ -183,7 +182,7 @@ console.log(menuData,"1111111111111111111");
                   />
                 </a>
               </div>
-            </div> */}
+            </div>
 
             {/* Navigation Menu */}
             <div className="col-xl-10 d-none d-xl-block cursor-pointer">

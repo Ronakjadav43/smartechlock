@@ -34,7 +34,7 @@ export default function Home() {
 
   const homeData = home.data || undefined;
 
-console.log(homeData,"----------------------123");
+// console.log(homeData,"----------------------123");
 
 
 
@@ -47,9 +47,9 @@ console.log(homeData,"----------------------123");
       <HeroSlider homeData={homeData} />
       <AboutSection homeData={homeData} />
       <FeaturesSection homeData={homeData} />
-      {/* <ServicesSection /> */}
-      {/* <TestimonialsSection />
-      <ProcessSection />
+      <ServicesSection homeData={homeData} />
+      <TestimonialsSection />
+      {/* <ProcessSection />
       <ProductsSection />
       <FaqSection />
       <QuoteSection />
