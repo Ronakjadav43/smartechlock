@@ -48,13 +48,13 @@ export default function Home() {
       <AboutSection homeData={homeData} />
       <FeaturesSection homeData={homeData} />
       <ServicesSection homeData={homeData} />
-      <TestimonialsSection />
-      {/* <ProcessSection />
+      <TestimonialsSection homeData={homeData} />
+      <ProcessSection />
       <ProductsSection />
       <FaqSection />
       <QuoteSection />
       <VideoSection />
-      <BlogSection /> */}
+      <BlogSection />
     
     </div>
     // </QueryClientProvider>

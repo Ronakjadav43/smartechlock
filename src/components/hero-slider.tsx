@@ -12,16 +12,21 @@ export default function HeroSlider({ homeData = undefined }: Props) {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
   // Flatten all media items into a single array for easy mapping
+  // Flatten all sub_items with their images into a single array for easy mapping
   const allSlides = useMemo(() => {
     if (!homeData) return []
     return homeData.flatMap((data) =>
-      data.sections[0].section_items.flatMap((item) =>
-        Array.isArray(item.multipleMedia)
-          ? item.multipleMedia.map((media) => ({
-              media,
-              item,
-            }))
-          : []
+      data.sections.flatMap((section) =>
+        section.section_items.flatMap((item) =>
+          Array.isArray(item.sub_items)
+            ? item.sub_items
+                .filter((subItem) => subItem.image && subItem.image.formats && subItem.image.formats.large)
+                .map((subItem) => ({
+                  media: subItem.image,
+                  item: subItem,
+                }))
+            : []
+        )
       )
     )
   }, [homeData])
