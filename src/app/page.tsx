@@ -49,8 +49,8 @@ export default function Home() {
       <FeaturesSection homeData={homeData} />
       <ServicesSection homeData={homeData} />
       <TestimonialsSection homeData={homeData} />
-      <ProcessSection />
-      <ProductsSection />
+      <ProcessSection homeData={homeData} />
+      <ProductsSection homeData={homeData} />
       <FaqSection />
       <QuoteSection />
       <VideoSection />

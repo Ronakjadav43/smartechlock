@@ -1,4 +1,10 @@
-export default function ProductsSection() {
+import { HomeData } from "@/types";
+
+type Props = {
+  homeData: HomeData[] | undefined;
+};
+
+export default function ProductsSection({ homeData = undefined }: Props) {
   return (
     <div className="tp-shop-area grey-bg pt-115 pb-90">
       <div className="container">
