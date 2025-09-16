@@ -54,7 +54,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
        <Header onMobileMenuToggle={handleMobileMenuToggle} />
            <MobileSidebar isOpen={isMobileSidebarOpen} onClose={handleMobileSidebarClose} />
       {children}
-       {/* <Footer /> */}
+       <Footer />
       {isVisible && (
       <Button
         onClick={scrollToTop}

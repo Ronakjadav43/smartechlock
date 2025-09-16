@@ -51,10 +51,10 @@ export default function Home() {
       <TestimonialsSection homeData={homeData} />
       <ProcessSection homeData={homeData} />
       <ProductsSection homeData={homeData} />
-      <FaqSection />
-      <QuoteSection />
-      <VideoSection />
-      <BlogSection />
+      <FaqSection homeData={homeData} />
+      <QuoteSection  />
+      <VideoSection homeData={homeData} />
+      <BlogSection homeData={homeData} />
     
     </div>
     // </QueryClientProvider>
