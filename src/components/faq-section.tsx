@@ -37,11 +37,7 @@ export default function FaqSection({ homeData = undefined }: Props) {
             <div className="tp-about-wapper3">
               <img
                 className="m-auto"
-                src={
-                  item?.image?.[0]?.formats?.small?.url
-                    ? `${process.env.NEXT_PUBLIC_API_URL}${item.image[0].formats.small.url}`
-                    : "/placeholder.svg"
-                }
+                src={`${process.env.NEXT_PUBLIC_API_URL}${(item as any).image[0].formats.small.url}`}
                 alt="theme-pure"
               />
             </div>

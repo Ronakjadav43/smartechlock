@@ -84,7 +84,7 @@ export default function BlogSection({ homeData = undefined }: Props) {
                                 {blog.subTitle}
                               </p>
                               <div className="tp-feed-link d-flex align-items-center">
-                                <a className="blog-link" href={blog.URL}>
+                                <a className="blog-link" href="#">
                                   Read More <i className="far fa-long-arrow-alt-right" />
                                 </a>
                               </div>

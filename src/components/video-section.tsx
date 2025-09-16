@@ -172,7 +172,7 @@ export default function VideoSection({ homeData = undefined }: Props) {
             .map((section) =>
               section.section_items.map((item, index) => (
 
-    <div>
+    <div key={index}>
       <div
         className="tp-support-area tp-support-area-2 p-relative"
         style={{ backgroundImage: "url(/assets/img/bg/pic-bg.jpg)" }}

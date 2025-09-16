@@ -28,7 +28,7 @@ export default function FeaturesSection({ homeData = undefined }: Props) {
                                     key={index}
                                     className="feature-third-area feature-bg-img pt-110 pb-110"
                                     style={{
-                                        backgroundImage: `url(${process.env.NEXT_PUBLIC_API_URL}${item?.multipleMedia?.[0]?.formats?.large?.url})`,
+                                        backgroundImage: `url(${process.env.NEXT_PUBLIC_API_URL}${(item?.multipleMedia?.[0] as any).formats?.large?.url})`,
                                     }}
                                 >
                                     <div className="container">
@@ -42,9 +42,9 @@ export default function FeaturesSection({ homeData = undefined }: Props) {
                                                 <div className="row">
 
 
-                                                    {item.sub_items.map((feature: { URL: any; title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }, idx: Key | null | undefined) => (
+                                                    {item.sub_items.map((feature, index) => (
 
-                                                        <div className="col-lg-6 col-md-6" key={idx}>
+                                                        <div className="col-lg-6 col-md-6" key={index}>
                                                             <div className="fea-list d-flex align-items-center mb-30">
                                                                 <i className={feature.URL ?? undefined} />
                                                                 <div className="fea-ctn pl-20">

@@ -14,52 +14,7 @@ type Props = {
 export default function ServicesSection({ homeData = undefined }: Props) {
   const [activeTabs, setActiveTabs] = useState<{ [key: string]: number }>({});
 
-  // const services = {
-  //   camera: {
-  //     title: "School & Hospital Security",
-  //     price: 42,
-  //     image: "assets/img/services/sv-8.jpg",
-  //     description:
-  //       "Stands for Closed Circuit Television. It is a video system that consists of strategically placed video cameras around an area that records footage, and is then transmitted to a display monitor(s) for real-time viewing as well as footage playback.",
-  //     features: [
-  //       "Departure of the expert",
-  //       "Configure software",
-  //       "24/7 Support",
-  //       "Remote Administration",
-  //       "Special application",
-  //     ],
-  //   },
-  //   cctv: {
-  //     title: "IP CCTV Solutions",
-  //     price: 65,
-  //     image: "assets/img/services/sv-9.jpg",
-  //     description:
-  //       "Advanced IP CCTV systems that provide high-definition video surveillance with remote monitoring capabilities and intelligent analytics for enhanced security.",
-  //     features: ["HD Video Quality", "Remote Monitoring", "Motion Detection", "Cloud Storage", "Mobile App Access"],
-  //   },
-  //   security: {
-  //     title: "Duet Security Systems",
-  //     price: 89,
-  //     image: "assets/img/services/sv-10.jpg",
-  //     description:
-  //       "Comprehensive security solutions combining multiple technologies for complete protection of your premises with integrated alarm and monitoring systems.",
-  //     features: [
-  //       "Integrated Alarms",
-  //       "Access Control",
-  //       "Perimeter Security",
-  //       "Emergency Response",
-  //       "Professional Installation",
-  //     ],
-  //   },
-  //   cyber: {
-  //     title: "Cyber Security Protection",
-  //     price: 120,
-  //     image: "assets/img/services/sv-11.jpg",
-  //     description:
-  //       "Advanced cybersecurity solutions to protect your digital infrastructure from threats, including network security, data protection, and threat monitoring.",
-  //     features: ["Network Protection", "Data Encryption", "Threat Detection", "Security Audits", "Incident Response"],
-  //   },
-  // }
+ 
 
   if (!homeData) return null;
 
