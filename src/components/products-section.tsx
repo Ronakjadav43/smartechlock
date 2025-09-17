@@ -1,4 +1,5 @@
 import { HomeData } from "@/types";
+import Image from "next/image";
 
 type Props = {
   homeData: HomeData[] | undefined;
@@ -37,16 +38,41 @@ export default function ProductsSection({ homeData = undefined }: Props) {
           
           <div className="col-xl-3 col-lg-6 col-md-6" key={index}>
             <div className="tp-porduct-item p-relative text-center mb-30">
-              {/* <img src="assets/img/shop/pic-1.jpg" alt="theme-pure" /> */}
+              {/* <Image src="assets/img/shop/pic-1.jpg" alt="theme-pure" /> */}
 
- <img className="m-auto"
+ {/* <Image className="m-auto"
                                     src={
                                       shop?.image?.formats?.thumbnail?.url
                                         ? `${process.env.NEXT_PUBLIC_API_URL}${shop?.image?.formats?.thumbnail?.url}`
                                         : "/placeholder.svg"
                                     }
-                                    alt="theme-pure"
-                                  />
+                                    width={100}
+                            height={100}
+                            alt="theme-pure"
+                                  /> */}
+
+
+ <Image className="m-auto !w-auto !h-[200px]"
+                                              // style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                                              src={
+                                                shop?.image?.formats?.large?.url
+                                                  ? `${process.env.NEXT_PUBLIC_API_URL}${shop.image.formats.large.url}`
+                                                  : shop?.image?.formats?.medium?.url
+                                                    ? `${process.env.NEXT_PUBLIC_API_URL}${shop.image.formats.medium.url}`
+                                                    : shop?.image?.formats?.small?.url
+                                                      ? `${process.env.NEXT_PUBLIC_API_URL}${shop.image.formats.small.url}`
+                                                      : shop?.image?.formats?.thumbnail?.url
+                                                        ? `${process.env.NEXT_PUBLIC_API_URL}${shop.image.formats.thumbnail.url}`
+                                                        : "/shop-avatar.jpg"
+                                              }
+                                              width={100}
+                                              height={100}
+                                              alt="theme-pure"
+                                            />
+
+
+
+
 
 
               <div className="tp-porduct-content">

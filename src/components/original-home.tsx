@@ -468,7 +468,7 @@ export default function Home() {
                     </a>
                   </div>
                   <div className="about-signature d-flex align-items-center mb-10">
-                    <img src="assets/img/about/ab-small3.png" alt="theme-pure" />
+                    {/* <img src="assets/img/about/ab-small3.png" alt="theme-pure" /> */}
                     <div className="ab-meta-content ml-15">
                       <h6 className="m-0 ab-meta-title">Salim Rana</h6>
                       <span className="ab-meta-subtitle">Head Of Idea</span>

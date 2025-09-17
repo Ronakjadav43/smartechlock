@@ -1,4 +1,5 @@
 import { HomeData } from "@/types";
+import Image from "next/image";
 
 
 type Props = {
@@ -45,18 +46,47 @@ export default function BlogSection({ homeData = undefined }: Props) {
                               <div className="fix">
                                 {" "}
                                 <a href="#">
-                                  {/* <img src="assets/img/news-feed/feed-item.jpg" alt="theme-pure" /> */}
+                                  {/* <Image src="assets/img/news-feed/feed-item.jpg" alt="theme-pure" /> */}
 
 
 
-                                  <img className="m-auto"
+                                  {/* <Image className="m-auto"
                                     src={
                                       blog?.image?.formats?.thumbnail?.url
                                         ? `${process.env.NEXT_PUBLIC_API_URL}${blog?.image?.formats?.thumbnail?.url}`
                                         : "/placeholder.svg"
                                     }
+                                        width={100}
+                            height={100}
+                            alt="theme-pure"
+                                  />
+                                  
+                                  
+                                  */}
+
+
+
+
+                                  <Image className="m-auto !w-auto !h-[200px]"
+                                    // style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                                    src={
+                                      blog?.image?.formats?.large?.url
+                                        ? `${process.env.NEXT_PUBLIC_API_URL}${blog.image.formats.large.url}`
+                                        : blog?.image?.formats?.medium?.url
+                                          ? `${process.env.NEXT_PUBLIC_API_URL}${blog.image.formats.medium.url}`
+                                          : blog?.image?.formats?.small?.url
+                                            ? `${process.env.NEXT_PUBLIC_API_URL}${blog.image.formats.small.url}`
+                                            : blog?.image?.formats?.thumbnail?.url
+                                              ? `${process.env.NEXT_PUBLIC_API_URL}${blog.image.formats.thumbnail.url}`
+                                              : "/blog-avatar.jpg"
+                                    }
+                                    width={100}
+                                    height={100}
                                     alt="theme-pure"
                                   />
+
+
+
 
 
 

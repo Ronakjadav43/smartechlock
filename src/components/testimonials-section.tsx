@@ -1,5 +1,6 @@
 "use client"
 import type { HomeData } from "@/types"
+import Image from "next/image"
 import { useState, useEffect } from "react"
 
 type Props = {
@@ -77,9 +78,9 @@ export default function TestimonialsSection({ homeData = undefined }: Props) {
                           <div
                             className="slick-track m-auto"
                             style={{
-                  width: "766.6666666666667%",
-                  left: "-100%",
-                  transform: `translateX(${currentSlide * -23}%)`,
+                              width: "766.6666666666667%",
+                              left: "-100%",
+                              transform: `translateX(${currentSlide * -23}%)`,
                               transition: "transform 0.5s ease-in-out",
                             }}
                           >
@@ -95,7 +96,7 @@ export default function TestimonialsSection({ homeData = undefined }: Props) {
                                   aria-hidden={!isActive}
                                   style={{
                                     outline: "none",
-                        width: "4.3478260869565215%",
+                                    width: "4.3478260869565215%",
                                     display: "inline-block",
                                   }}
                                 >
@@ -104,14 +105,32 @@ export default function TestimonialsSection({ homeData = undefined }: Props) {
                                       <div className="testi-item-list">
                                         <div className="tp-testimonial-item text-center">
                                           <div className="testi-img p-relative">
-                                            <img
+                                            {/* <Image
+                                              src={`${process.env.NEXT_PUBLIC_API_URL}${testimonial?.image?.formats?.large?.url}` || `${process.env.NEXT_PUBLIC_API_URL}${testimonial?.image?.formats?.medium?.url}` || `${process.env.NEXT_PUBLIC_API_URL}${testimonial?.image?.formats?.small?.url}` || `${process.env.NEXT_PUBLIC_API_URL}${testimonial?.image?.formats?.thumbnail?.url}`}
+                                               width={100}
+                            height={100}
+                            alt="theme-pure"
+                                            /> */}
+
+                                            <Image
+                                              style={{ borderRadius: "50%", width: "100px", height: "100px", objectFit: "cover" }}
                                               src={
-                                                testimonial?.image?.url
-                                                  ? `${process.env.NEXT_PUBLIC_API_URL}${testimonial?.image?.url}`
-                                                  : "/placeholder.svg"
+                                                testimonial?.image?.formats?.large?.url
+                                                  ? `${process.env.NEXT_PUBLIC_API_URL}${testimonial.image.formats.large.url}`
+                                                  : testimonial?.image?.formats?.medium?.url
+                                                    ? `${process.env.NEXT_PUBLIC_API_URL}${testimonial.image.formats.medium.url}`
+                                                    : testimonial?.image?.formats?.small?.url
+                                                      ? `${process.env.NEXT_PUBLIC_API_URL}${testimonial.image.formats.small.url}`
+                                                      : testimonial?.image?.formats?.thumbnail?.url
+                                                        ? `${process.env.NEXT_PUBLIC_API_URL}${testimonial.image.formats.thumbnail.url}`
+                                                        : "/testimonial-avatar.jpg"
                                               }
+                                              width={100}
+                                              height={100}
                                               alt="theme-pure"
                                             />
+
+
                                             <i className="fal fa-quote-right quote-style" />
                                           </div>
                                           <h4 className="testi-text">" {testimonial.title} "</h4>

@@ -220,7 +220,7 @@ export default function VideoSection({ homeData = undefined }: Props) {
             <div className="relative w-full h-[500px] pb-[56.25%]">
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src={item.URL || "https://youtu.be/bukN2P7WpwE?si=Ks3SfhwLY--C62A0"}
+                src={item.URL || ""}
                 title="CCTV Security Video"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
