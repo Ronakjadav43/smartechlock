@@ -16,14 +16,7 @@ export const getMenu = async (): Promise<Menutype[]> => {
 export const getHome = async (slug: string): Promise<HomeData[]> => {
   try {
     const res = await axiosInstance.get(
-      `/pages?filters[slug][$eq]=home&populate[sections][populate][section_items][populate][image]=true&populate[sections][populate][section_items][populate][multipleMedia]=true&populate[sections][populate][section_items][populate][sub_items][populate][image]=true&populate[sections][populate][section_items][populate][sub_items][populate][multipleMedia]=true&populate[sections][populate][type][populate]=*`,
-
-
-
-
-
-
-
+      `/pages?filters[slug][$eq]=${slug}&populate[sections][populate][section_items][populate][image]=true&populate[sections][populate][section_items][populate][multipleMedia]=true&populate[sections][populate][section_items][populate][sub_items][populate][image]=true&populate[sections][populate][section_items][populate][sub_items][populate][multipleMedia]=true&populate[sections][populate][type][populate]=*`,
       // `/pages?filters[slug][$eq]=home&&populate[sections][populate][section_items][populate]=*`
     );
     return res.data.data;
