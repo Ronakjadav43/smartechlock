@@ -30,17 +30,17 @@ export default function AboutUs() {
    const queriess = useQueries({
     queries: [
       {
-        queryKey: ["home"],
-        queryFn:() => getHome("home"),
+        queryKey: ["about-us"],
+        queryFn:() => getHome("aboutUs"),
       },
     ],
   }) as [UseQueryResult<HomeData[], Error>, UseQueryResult<HomeData, Error>];
 
-  const [home] = queriess;
+  const [aboutUs] = queriess;
 
-  const homeData = home.data || undefined;
+  const aboutUsData = aboutUs.data || undefined;
 
-// console.log(homeData,"----------------------123");
+// console.log(aboutUsData,"----------------------123");
 
 
 
@@ -50,17 +50,17 @@ export default function AboutUs() {
       // <QueryClientProvider client={queryClient}>
     <div id="__next">
     
-      <Breadcrumb homeData={homeData} />
-      <About homeData={homeData} />
+      <Breadcrumb aboutUsData={aboutUsData} />
+      <About aboutUsData={aboutUsData} />
       {/* <FeaturesSection homeData={homeData} /> */}
-      <Services homeData={homeData} />
-      <Gallary homeData={homeData} />
-      <History homeData={homeData} />
+      <Services aboutUsData={aboutUsData} />
+      <Gallary aboutUsData={aboutUsData} />
+      <History aboutUsData={aboutUsData} />
       {/* <ProductsSection homeData={homeData} />
       <FaqSection homeData={homeData} />
       <QuoteSection  />
       <VideoSection homeData={homeData} /> */}
-      <News homeData={homeData} />
+      <News aboutUsData={aboutUsData} />
     
     </div>
     // </QueryClientProvider>

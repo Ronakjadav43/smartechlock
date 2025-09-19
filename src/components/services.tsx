@@ -1,11 +1,11 @@
 "use client"
-import type { HomeData } from "@/types"
+import type { aboutUsData } from "@/types"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
 type Props = {
-  homeData: HomeData[] | undefined
+  aboutUsData: aboutUsData[] | undefined
 }
 
 const getImageUrl = (image: any): string => {
@@ -27,10 +27,10 @@ const getImageUrl = (image: any): string => {
   return "/service-placeholder.jpg"
 }
 
-export default function Services({ homeData = undefined }: Props) {
+export default function Services({ aboutUsData = undefined }: Props) {
   const [activeTabs, setActiveTabs] = useState<{ [key: string]: number }>({})
 
-  if (!homeData) return null
+  if (!aboutUsData) return null
 
   return (
     // <div className="service-area">
@@ -127,30 +127,38 @@ export default function Services({ homeData = undefined }: Props) {
     //         ),
     //     )}
     // </div>
-
-
     <div className="tp-process-area grey-bg pt-115 pb-90 ">
-            <div className="container">
+            {aboutUsData &&
+        aboutUsData.map((data) =>
+          data.sections
+            .filter(
+              (section) => section.type.type === "Services"
+            )
+            .map((section) =>
+              section.section_items.map((item, index) => (
+            <div className="container" key={index}>
                 <div className="row text-center">
                     <div className="col-xl-12">
                         <div className="tp-section-box tp-section-box-2 p-relative mb-45"><span
-                                className="tp-section-subtitle d-inline-block pre mb-10">Services</span>
-                            <h2 className="tp-section-title">What We Provide</h2>
+                                className="tp-section-subtitle d-inline-block pre mb-10">{section.type.type}</span>
+                            <h2 className="tp-section-title">{item.title}</h2>
                         </div>
                     </div>
                 </div>
                 <div className="row counter-row">
-                    <div className=" col-xxl-3 col-xl-3 col-lg-6 col-md-6 mb-30">
+                   {item.sub_items.map((subItem, index) => (
+                    <div className=" col-xxl-3 col-xl-3 col-lg-6 col-md-6 mb-30" key={index}>
                         <div className="tpprocess-hm-4 p-relative">
                             <div className="process-content"></div><span className="flaticon-secure"><i
-                                    className="flaticon-secure"></i></span>
+                                    className={subItem.URL || ""}></i></span>
                             <div className="tp-process-contnt-4">
-                                <h6>Smart Systems</h6>
-                                <p className="m-0">We believe the value that our functions add to a business.</p>
+                                <h6>{subItem.title || ""}</h6>
+                                <p className="m-0">{subItem.subTitle || ""}</p>
                             </div>
                         </div>
                     </div>
-                    <div className=" col-xxl-3 col-xl-3 col-lg-6 col-md-6 mb-30">
+                    ))} 
+                    {/* <div className=" col-xxl-3 col-xl-3 col-lg-6 col-md-6 mb-30">
                         <div className="tpprocess-hm-4 p-relative">
                             <div className="process-content"></div><span className="flaticon-secure"><i
                                     className="flaticon-security-camera"></i></span>
@@ -179,12 +187,13 @@ export default function Services({ homeData = undefined }: Props) {
                                 <p className="m-0">We believe the value that our functions add to a business.</p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
+             ))
+            )
+        )} 
         </div>
-
-
   )
 }
 

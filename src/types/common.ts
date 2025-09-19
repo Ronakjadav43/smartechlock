@@ -42,6 +42,8 @@ export interface SectionItem {
   uploadDocument: string | null;
   URL: string | null;
    sub_items: subItem[];
+   list: list[];
+  price: string | null;
 }
 
 
@@ -63,7 +65,10 @@ export interface subItem {
   price: string | null;
 }
 
-
+export interface list {
+  id: number;
+  text: string;
+}
 
 
 export interface SectionType {
@@ -112,6 +117,31 @@ export interface HomeData {
   og_url: string;
   og_type: string;
 }
+
+
+
+
+export interface aboutUsData {
+  sections: Section[];
+  id: number;
+  documentId: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  page: Page;
+  og_title: string;
+  og_description: string;
+  og_image: Images[];
+  og_url: string;
+  og_type: string;
+}
+
+
+
+
+
+
 
 export interface Menutype {
   id: number;
