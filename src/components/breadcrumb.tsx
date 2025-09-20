@@ -3,7 +3,7 @@ import Image from "next/image";
 
 
 type Props = {
-  aboutUsData: aboutUsData[] | undefined;
+  BreadcrumbData: aboutUsData[] | undefined;
 };
 
 
@@ -30,23 +30,23 @@ function getBackgroundImageUrl(item: any): string {
 
 
 
-export default function Breadcrumb({ aboutUsData = undefined }: Props) {
+export default function Breadcrumb({ BreadcrumbData = undefined }: Props) {
 
 
-  if (!aboutUsData) return null;
+  if (!BreadcrumbData) return null;
 
 
 
 
 
-console.log(aboutUsData,"----------------------123");
+console.log(BreadcrumbData,"----------------------123");
 
 
   return (
     <div>
 
-      {aboutUsData &&
-        aboutUsData.map((data) =>
+      {BreadcrumbData &&
+        BreadcrumbData.map((data) =>
           data.sections
             .filter(
               (section) => section.type.type === "Breadcrumb"

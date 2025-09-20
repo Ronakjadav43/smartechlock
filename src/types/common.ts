@@ -137,7 +137,21 @@ export interface aboutUsData {
   og_type: string;
 }
 
-
+export interface productsData {
+  sections: Section[];
+  id: number;
+  documentId: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  page: Page;
+  og_title: string;
+  og_description: string;
+  og_image: Images[];
+  og_url: string;
+  og_type: string;
+}
 
 
 

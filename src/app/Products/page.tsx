@@ -24,23 +24,24 @@ import Services from "@/components/services"
 import Gallary from "@/components/gallary"
 import History from "@/components/history"
 import News from "@/components/news"
+import ProductList from "@/components/productList"
 
-export default function AboutUs() {
+export default function Products() {
 
    const queriess = useQueries({
     queries: [
       {
-        queryKey: ["about-us"],
-        queryFn:() => getHome("aboutUs"),
+        queryKey: ["products"],
+        queryFn:() => getHome("products"),
       },
     ],
   }) as [UseQueryResult<HomeData[], Error>, UseQueryResult<HomeData, Error>];
 
-  const [aboutUs] = queriess;
+  const [products] = queriess;
 
-  const aboutUsData = aboutUs.data || undefined;
+  const productsData = products.data || undefined;
 
-// console.log(aboutUsData,"----------------------123");
+// console.log(productsData,"----------------------123");
 
 
 
@@ -50,17 +51,21 @@ export default function AboutUs() {
       // <QueryClientProvider client={queryClient}>
     <div id="__next">
     
-      <Breadcrumb BreadcrumbData={aboutUsData} />
-      <About aboutUsData={aboutUsData} />
+      <Breadcrumb BreadcrumbData={productsData} />
+
+<ProductList productsData={productsData} />
+
+
+      {/* <About aboutUsData={productsData} /> */}
       {/* <FeaturesSection homeData={homeData} /> */}
-      <Services aboutUsData={aboutUsData} />
-      <Gallary aboutUsData={aboutUsData} />
-      <History aboutUsData={aboutUsData} />
+      {/* <Services aboutUsData={productsData} />
+      <Gallary aboutUsData={productsData} />
+      <History aboutUsData={productsData} /> */}
       {/* <ProductsSection homeData={homeData} />
       <FaqSection homeData={homeData} />
       <QuoteSection  />
       <VideoSection homeData={homeData} /> */}
-      <News aboutUsData={aboutUsData} />
+      {/* <News aboutUsData={productsData} /> */}
     
     </div>
     // </QueryClientProvider>
