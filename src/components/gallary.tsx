@@ -1,5 +1,5 @@
 "use client"
-import type { aboutUsData } from "@/types"
+import type { aboutUsData, Media } from "@/types"
 import Image from "next/image"
 import { useState } from "react"
 
@@ -7,57 +7,61 @@ type Props = {
   aboutUsData: aboutUsData[] | undefined
 }
 
-export default function Gallary({ aboutUsData = undefined }: Props) {
+export default function Gallery({ aboutUsData }: Props) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+
+  // helper
+  const getImageUrl = (media: Media, size: "large" | "medium" | "small" = "small") => {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || ""
+    return (
+      baseUrl +
+        (media?.formats?.[size]?.url ||
+         media?.url ||
+         "/placeholder.svg")
+    )
+  }
 
   return (
     <div className="gallary-area mb-115">
       <div className="container-fluid p-0">
-        {/* ✅ One row flex gallery */}
-        <div className="flex gap-4  scrollbar-hide justify-center">
-          {aboutUsData &&
-            aboutUsData.map((data) =>
-              data.sections
-                .filter((section) => section.type.type === "Gallary")
-                .map((section) =>
-                  section.section_items.map((item, index) =>
-                    item.multipleMedia?.map((media, i) => (
-                      <div
-                        key={`${index}-${i}`}
-                        className="cursor-pointer flex-shrink-0"
-                        onClick={() =>
-                          setSelectedImage(
-                            `${process.env.NEXT_PUBLIC_API_URL}${
-                              media.formats?.large?.url ||
-                              media.formats?.medium?.url ||
-                              media.formats?.small?.url
-                            }`
-                          )
-                        }
-                      >
-                        <Image
-                          src={`${process.env.NEXT_PUBLIC_API_URL}${media.formats?.small?.url}`}
-                          alt={item.title || "gallery"}
-                          width={480}
-                          height={570}
-                          className="object-cover w-[480px] h-[570px] rounded-lg hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    ))
-                  )
+        <div className="flex gap-4 overflow-x-auto scrollbar-hide justify-center">
+          {aboutUsData?.map((data) =>
+            data.sections
+              .filter((section) => section.type.type === "Gallary")
+              .flatMap((section) =>
+                section.section_items.flatMap((item, index) =>
+                  Array.isArray(item.multipleMedia)
+                    ? item.multipleMedia.map((media: Media, i: number) => (
+                        <div
+                          key={`${index}-${i}`}
+                          className="cursor-pointer flex-shrink-0"
+                          onClick={() => setSelectedImage(getImageUrl(media, "large"))}
+                        >
+                          <Image
+                            src={getImageUrl(media, "small")}
+                            alt={item.title || "gallery"}
+                            width={480}
+                            height={570}
+                            className="object-cover w-[480px] h-[570px] rounded-lg hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      ))
+                    : [] // 👈 avoid string[] issue
                 )
-            )}
+              )
+          )}
         </div>
       </div>
 
-      {/* ✅ Fullscreen Modal with animation */}
       {selectedImage && (
         <div
           className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative animate-zoom-in">
-            {/* Close button */}
+          <div
+            className="relative animate-fade-in"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               className="absolute -top-10 right-0 text-white text-3xl font-bold"
               onClick={() => setSelectedImage(null)}
@@ -78,6 +82,91 @@ export default function Gallary({ aboutUsData = undefined }: Props) {
     </div>
   )
 }
+
+
+
+
+
+// "use client"
+// import type { aboutUsData } from "@/types"
+// import Image from "next/image"
+// import { useState } from "react"
+
+// type Props = {
+//   aboutUsData: aboutUsData[] | undefined
+// }
+
+// export default function Gallary({ aboutUsData = undefined }: Props) {
+//   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+
+//   return (
+//     <div className="gallary-area mb-115">
+//       <div className="container-fluid p-0">
+//         {/* ✅ One row flex gallery */}
+//         <div className="flex gap-4  scrollbar-hide justify-center">
+//           {aboutUsData &&
+//             aboutUsData.map((data) =>
+//               data.sections
+//                 .filter((section) => section.type.type === "Gallary")
+//                 .map((section) =>
+//                   section.section_items.map((item, index) =>
+//                     item.multipleMedia?.map((media, i) => (
+//                       <div
+//                         key={`${index}-${i}`}
+//                         className="cursor-pointer flex-shrink-0"
+//                         onClick={() =>
+//                           setSelectedImage(
+//                             `${process.env.NEXT_PUBLIC_API_URL}${
+//                               media.formats?.large?.url ||
+//                               media.formats?.medium?.url ||
+//                               media.formats?.small?.url
+//                             }`
+//                           )
+//                         }
+//                       >
+//                         <Image
+//                           src={`${process.env.NEXT_PUBLIC_API_URL}${media.formats?.small?.url}`}
+//                           alt={item.title || "gallery"}
+//                           width={480}
+//                           height={570}
+//                           className="object-cover w-[480px] h-[570px] rounded-lg hover:scale-105 transition-transform duration-300"
+//                         />
+//                       </div>
+//                     ))
+//                   )
+//                 )
+//             )}
+//         </div>
+//       </div>
+
+//       {/* ✅ Fullscreen Modal with animation */}
+//       {selectedImage && (
+//         <div
+//           className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+//           onClick={() => setSelectedImage(null)}
+//         >
+//           <div className="relative animate-zoom-in">
+//             {/* Close button */}
+//             <button
+//               className="absolute -top-10 right-0 text-white text-3xl font-bold"
+//               onClick={() => setSelectedImage(null)}
+//             >
+//               ✕
+//             </button>
+
+//             <Image
+//               src={selectedImage}
+//               alt="Zoomed"
+//               width={480}
+//               height={570}
+//               className="object-cover w-[480px] h-[570px] rounded-lg shadow-lg"
+//             />
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   )
+// }
 
 
 

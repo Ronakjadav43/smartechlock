@@ -237,3 +237,19 @@ export interface StrapiArticle {
     content: string;
   };
 }
+
+
+export type MediaFormat = {
+  url: string
+}
+
+export type Media = {
+  url: string
+  formats?: {
+    small?: MediaFormat
+    medium?: MediaFormat
+    large?: MediaFormat
+  }
+}
+
+

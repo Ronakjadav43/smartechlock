@@ -181,7 +181,7 @@ export default function History({ aboutUsData = undefined }: Props) {
                        {item.sub_items.map((subItem, index) => (
                        
                         <div className="tp-ab-4-right d-flex align-items-center" key={index}>
-                            <h4>{format(new Date(subItem.date), "yyyy")}</h4>
+                            <h4>{subItem.date ? format(new Date(subItem.date), "yyyy") : ""}</h4>
                             <div className="ab-4-content">
                                 <h3>{subItem.title}</h3>
                                 <p>{subItem.subTitle}</p>

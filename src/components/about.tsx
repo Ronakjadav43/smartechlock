@@ -5,6 +5,8 @@ type Props = {
     aboutUsData: aboutUsData[] | undefined
 }
 
+
+
 const getImageUrl = (mediaItem: any): string => {
     if (!mediaItem) return "/about-us-image.jpg"
 
@@ -129,15 +131,16 @@ export default function About({ aboutUsData = undefined }: Props) {
                                         <div className="col-xl-6 col-lg-5">
                                             <div className="ab-wrapper-4 p-relative">
                                                 <div className="ab-right-img">
-                                                    {/* <img src="assets/img/about/ab-hm-4.jpg" alt="theme-pure" /> */}
-                                                    <Image
+                                                    <img src="assets/img/about/ab-hm-4.jpg" alt="theme-pure" />
+                                                    {/* <Image
                                                         className="ab-1st-img"
-                                                        src={getImageUrl(item?.image?.[0]) || "/placeholder.svg"}
+                                                        src={getImageUrl(item?.image[0]) || "/placeholder.svg"}
+                                                        
                                                         title="theme-pure"
                                                         width={500}
                                                         height={500}
                                                         alt="theme-pure"
-                                                    />
+                                                    /> */}
                                                 </div>
                                                 <div className="tp-ab-left-meta">
                                                     <h3>Good Experience <br /> In Last</h3>

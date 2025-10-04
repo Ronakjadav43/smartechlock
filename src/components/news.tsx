@@ -206,8 +206,14 @@ export default function News({ aboutUsData = undefined }: Props) {
 
                                                         </a></div>
                                                         <div className="tp-meta-date">
-                                                            <h3 className="meta-date-title"><a href="#">{format(new Date(news.date), "dd")}</a></h3>
-                                                            <p>{format(new Date(news.date), "MMMM")}</p>
+                                                            <h3 className="meta-date-title">
+                                                                <a href="#">
+                                                                    {news.date ? format(new Date(news.date), "dd") : "--"}
+                                                                </a>
+                                                            </h3>
+                                                            <p>
+                                                                {news.date ? format(new Date(news.date), "MMMM") : "--"}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div className="tp-feed-content">
